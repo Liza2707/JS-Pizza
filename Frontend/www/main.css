@@ -1,8 +1,21 @@
+.box {
+    display: flex;
+}
+
+.row {
+    margin-right: 100px;
+    margin-left: -40px;
+}
+
+.container {
+    margin-top: 250px;
+}
+
 .overlay {
     position: fixed;
     top:0;
     left: 0;
-    width: 75%;
+    width: 78%;
     height: 16%;
     background-color: black;
     opacity: 0.85;
@@ -53,7 +66,7 @@
 .badge-up {
     top: 0;
     position:  fixed;
-    background: darkorange;
+    background: chocolate;
     text-transform: uppercase;
     left: 20px;
     bottom: 0;
@@ -72,6 +85,30 @@
     font-family: sans-serif;
 }
 
+#badge-down {
+    left: 1%;
+    top: 75%;
+    background-color: chocolate;
+    position: fixed;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 25px;
+
+
+
+}
+
+#badge-down p {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+
 .text-pizza-badge {
     padding-top: 20px;
     font-size: 20px;
@@ -86,13 +123,67 @@
     margin-top: 1px;
 }
 
+#pizza_list {
+    width: 83%;
+}
+
+#statistics-of-order {
+    flex: 1;
+    left: 78%;
+    top: 0;
+    width: 22%;
+    height: 100%;
+    background-color: white;
+    z-index: 102;
+    position: absolute;
+}
+
+@media (max-width: 1366px) {
+
+}
+
 @media (max-width: 1300px) {
+
     #free-delivery-on-overlay {
         display: none;
     }
+    #statistics-of-order {
+        width: 50%;
+    }
+
+
 }
+
+@media (max-width: 800px){
+    #pizza_list {
+        width: 100%;
+    }
+
+}
+
+
+
 @media (max-width: 850px) {
     #schedule-on-overlay {
         display: none;
     }
+
+    .overlay {
+        width: 50%;
+    }
+    #statistics-of-order {
+        left: 50%;
+    }
+
+    .col-md-4 {
+        width: 60%;
+    }
+    #button-log-in {
+        top: 50px;
+    }
+    #pizza_list {
+        width: 90%;
+    }
+
 }
+
