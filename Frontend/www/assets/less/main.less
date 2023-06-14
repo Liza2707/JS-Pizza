@@ -1,3 +1,276 @@
 @mainColor: blue;
 
 @import "pizza/pizza-card";
+
+.box {
+  display: flex;
+}
+
+.row {
+  margin-right: 100px;
+  margin-left: -40px;
+}
+
+.container {
+  margin-top: 250px;
+}
+
+.overlay {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 78%;
+  height: 16%;
+  background-color: black;
+  opacity: 0.85;
+  z-index: 100;
+}
+.first-line-on-overlay p  {
+  color: gainsboro;
+  display: inline-block;
+  font-family: sans-serif;
+  margin-top: 15px;
+
+}
+#number-on-overlay {
+  margin-left: 150px;
+  margin-top: 5px;
+  font-size: 20px;
+}
+#schedule-on-overlay {
+  font-size: 13px;
+  margin-left: 30px;
+}
+
+#free-delivery-on-overlay {
+  margin-left: 60px;
+  font-size: 20px;
+}
+
+#button-log-in {
+  position: absolute;
+  margin-top: 5px;
+  margin-right: 10px;
+  top: 0;
+  right: 0;
+  color: white;
+  background-color: goldenrod;
+  border-color: goldenrod;
+  border-radius: 5px;
+  padding: 6px 15px;
+  font-size: 15px;
+}
+
+#pizza-on-overlay {
+  color: white;
+  margin-left: 150px;
+  font-size: 20px;
+}
+
+.badge-up {
+  top: 0;
+  position:  fixed;
+  background: chocolate;
+  text-transform: uppercase;
+  left: 20px;
+  bottom: 0;
+  width: 100px;
+  height: 120px;
+  border-bottom: 20px solid #eeee;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  z-index: 101;
+}
+.badge-up p {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+#badge-down {
+  left: 1%;
+  top: 75%;
+  background-color: chocolate;
+  position: fixed;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 25px;
+  z-index: 1;
+
+
+}
+
+#badge-down p {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+
+.text-pizza-badge {
+  padding-top: 20px;
+  font-size: 20px;
+}
+.text-kma-badge {
+  font-size: 25px;
+}
+
+#hr-overlay {
+  color: gainsboro;
+  margin-left: 150px;
+  margin-top: 1px;
+}
+
+#pizza_list {
+  width: 83%;
+}
+
+#statistics-of-order {
+  flex: 1;
+  left: 78%;
+  top: 0;
+  width: 22%;
+  height: 100%;
+  background-color: white;
+  z-index: 102;
+  position: absolute;
+}
+
+#first-line {
+  display: inline-block;
+}
+
+.text-all-pizzas {
+  left: 33%;
+  top: 130px;
+  position: absolute;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.number {
+  left: 42%;
+  top: 135px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: orange;
+  height: 25px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+
+}
+
+.second-line {
+  top: 180px;
+  position: absolute;
+  left: 12%;
+  font-size: 20px;
+}
+
+.choosen-option {
+  color: white;
+  background-color: darkorange;
+  border: none;
+  border-radius: 10%;
+  padding: 7px 15px;
+}
+
+.option {
+  display: inline-block;
+  padding-left: 25px;
+  background-color: beige;
+  border: none;
+  color: darkorange;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  margin-top: 80px;
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 160px;
+  text-align: center;
+}
+
+@media (max-width: 1250px) {
+  .second-line {
+    display: none;
+  }
+
+  #first-line {
+    display: none;
+  }
+  .container {
+    margin-top: 110px;
+  }
+}
+
+@media (max-width: 1300px) {
+
+  #free-delivery-on-overlay {
+    display: none;
+  }
+  #statistics-of-order {
+    width: 50%;
+  }
+
+}
+
+@media (max-width: 800px){
+  #pizza_list {
+    width: 100%;
+  }
+
+}
+
+
+
+@media (max-width: 850px) {
+  #schedule-on-overlay {
+    display: none;
+  }
+
+  .overlay {
+    width: 50%;
+  }
+  #statistics-of-order {
+    left: 50%;
+  }
+
+  .col-md-4 {
+    width: 60%;
+  }
+  #button-log-in {
+    top: 50px;
+  }
+  #pizza_list {
+    width: 90%;
+  }
+
+  .container {
+    margin-left: 25px;
+  }
+}
+

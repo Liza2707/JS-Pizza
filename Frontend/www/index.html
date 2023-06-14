@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yelyzaveta Tretiak">
     <title>Pizza</title>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="main.css"/>-->
     <!-- Bootsrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -34,6 +34,21 @@
 </div>
 
 <div class="box">
+    <div class="menu">
+    <!-- напис згори над піцами-->
+    <div id="first-line">
+        <span class="text-all-pizzas">Усі піци</span>
+        <div class="number">8</div>
+    </div>
+        <div class="second-line">
+        <button class="choosen-option">Усі</button>
+        <button class="option">М'ясні</button>
+        <button class="option">З ананасами</button>
+        <button class="option">З грибами</button>
+        <button class="option">З морепродуктами</button>
+        <button class="option">Вега</button>
+        </div>
+    </div>
 
 <div id="cart"></div>
 <div class="container">
@@ -86,6 +101,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 
@@ -98,6 +115,11 @@
     <p class="text-this-week">на все</p>
     <p class="text-20%">-20%</p>
 </div>
+
+<footer>
+    <p>Pizza-22 - практичний проект в межах курсу JacaScript в Києво-Могилянській академії</p>
+    <p>Доставка піци не здійснюється</p>
+</footer>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
 
