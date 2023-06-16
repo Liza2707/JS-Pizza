@@ -2,6 +2,7 @@
 
 @import "pizza/pizza-card";
 
+
 .box {
   display: flex;
 }
@@ -19,7 +20,7 @@
   position: fixed;
   top:0;
   left: 0;
-  width: 78%;
+  width: 77%;
   height: 16%;
   background-color: black;
   opacity: 0.85;
@@ -101,25 +102,35 @@
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
-  padding: 25px;
+  padding: 20px;
   z-index: 1;
 
 
 }
 
 #badge-down p {
-  color: white;
+ // color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  font-size: 15px;
+
 }
+.text-this-week, .text-20\% {
+  font-size: 13px;
+  color: white;
+}
+
+.dots {
+  color: darkgrey;
+  font-size: 10px;
+}
+
 .image-badge-down {
   left: 1%;
   top: 73.5%;
   position: fixed;
-  width: 115px;
+  width: 96.5px;
 }
 
 .text-pizza-badge {
@@ -137,20 +148,97 @@
 }
 
 #pizza_list {
-  width: 83%;
+  width: 80%;
 }
 
 #statistics-of-order {
 // flex: 1;
-  left: 78%;
+  left: 77%;
   top: 0;
-  width: 425px;
+  width: 320px;
   height: 100%;
   background-color: white;
   z-index: 102;
   position: fixed;
 }
 
+#main-line-of-stat {
+  margin-left: 20px;
+  margin-top: 30px;
+  display: inline-block;
+
+}
+#order {
+  color: black;
+ // padding: 30px 15px;
+  position: fixed;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block;
+}
+#main-line-of-stat .number {
+  top: 1%;
+  left: 0;
+}
+
+#button-clear-order {
+  //left: 15%;
+  margin-left: 165px;
+  position: fixed;
+  font-size: 10px;
+  border: none;
+  background-color: white;
+  color: darkgrey;
+  padding-top: 5px;
+}
+
+.table-wrapper {
+  top: 50px;
+  height: 440px;
+  position: relative;
+  background-color: rgba(41,17,13,0.05);
+  overflow: auto;
+}
+
+#down-stat {
+  bottom: 0;
+  position: fixed;
+  border-top: 1px solid black;
+  width: 319px;
+  height: 95px;
+}
+
+.text-of-order {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  display: inline-block;
+  position: fixed;
+}
+
+.sum-of-order {
+  right: 40px;
+  position: absolute;
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.button-in-stat-to-order {
+  bottom: 15px;
+  position: absolute;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  background-color: #ffc019;
+  border: none;
+  border-radius: 6px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 90%;
+}
 
 #first-line {
   position: absolute;
@@ -247,7 +335,8 @@ footer {
     display: none;
   }
   #statistics-of-order {
-    width: 50%;
+    //width: 50%;
+    width: 320px;
   }
 
 }
@@ -294,6 +383,8 @@ footer {
   #first-line {
     left: 15%;
   }
+
+  footer { width: 50%; padding-left: 100px}
 }
 
 @media (max-width: 845px) {
