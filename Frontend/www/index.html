@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yelyzaveta Tretiak">
     <title>Pizza</title>
+    <link rel="icon" href="assets/images/map-icon.png">
     <!--<link rel="stylesheet" type="text/css" href="main.css"/>-->
     <!-- Bootsrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -16,7 +17,7 @@
 
 
 </head>
-<body style="background-color: beige">
+<body style="background-color: #fffff4">
 
 <div class="overlay">
     <div class="first-line-on-overlay">
@@ -61,11 +62,36 @@
                 <img src="assets/images/pizza_1.jpg">
 
                 <div class="caption"><h3>Thumbnail label</h3>
-
+                    <p class="small-p">hi</p>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 
+                    <div class="icons-for-small-size">
+                        <img src="assets/images/size-icon.svg" class="icon-size">
+                        <span class="number-small-size-icon">30</span>
+
+                        <img src="assets/images/size-icon.svg">
+                        <span class="number-big-size-icon">40</span>
+                    </div>
+
+                    <div class="weight-icons">
+                        <img src="assets/images/weight.svg" class="icon-size">
+                        <span class="number-small-size-icon-weight">370</span>
+
+                        <img src="assets/images/weight.svg">
+                        <span class="number-big-size-weight">660</span>
+                    </div>
+
+                    <div class="prices">
+                        <span class="price-small-size">99</span>
+                        <span class="price-big-size">169</span>
+                    </div>
+                    <div>
+                        <span class="hrn-small-size">грн.</span>
+                        <span class="hrn-big-size">грн.</span>
+                    </div>
+
                     <p>
-                        <a href="#" class="btn btn-primary">Button 2</a>
+                        <div><a href="#" class="btn btn-primary">Button 2</a></div>
                         <a href="#" class="btn btn-default">Button 1</a>
                     </p>
                 </div>
@@ -104,28 +130,9 @@
             </div>
         </div>
 
-
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail pizza-card">
-                <img src="assets/images/pizza_1.jpg">
-
-                <div class="caption"><h3>Thumbnail label</h3>
-
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-
-                    <p>
-                        <a href="#" class="btn btn-primary">Button 2</a>
-                        <a href="#" class="btn btn-default">Button 1</a>
-                    </p>
-                </div>
-            </div>
         </div>
 
     </div>
-
-
-
-
 
 </div>
 
@@ -140,8 +147,108 @@
 
     <!--таблиця із замовленням -->
     <div class="table-wrapper">
-        <table>
-            <div class="item-in-table"></div>
+        <table class="table-in-statistics">
+            <!--перший рядок в таблиці-->
+            <tr>
+                <td>
+                    <div class="first-column">
+                        <div class="name-of-pizza-stat">BBQ (Мала)</div>
+                        <div class="icons">
+                        <div class="crossed-circle-and-number">
+                            <img src="assets/images/size-icon.svg">
+                            <span class="number-of-size-icon">30</span>
+                        </div>
+                        <div class="weight-icon-and-number">
+                            <img src="assets/images/weight.svg">
+                            <span class="number-of-weight-icon">460</span>
+                        </div>
+                        </div>
+
+                        <div class="third-row">
+                            <!--ціна -->
+                            <span class="price">556грн</span>
+                            <!--червона кнопка -->
+                            <button class="red-button">-</button>
+                            <span class="amount">4</span>
+                            <button class="green-button">+</button>
+                            <button class="cross-button">x</button>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <img src="assets/images/pizza_2_1.png" class="cut-image-of-pizza">
+                </td>
+            </tr>
+
+            <!--другий рядок -->
+            <tr>
+                <td>
+                    <div class="first-column">
+                        <div class="name-of-pizza-stat">Россо Густо (Мала)</div>
+                        <div class="icons">
+                            <div class="crossed-circle-and-number">
+                                <img src="assets/images/size-icon.svg">
+                                <span class="number-of-size-icon">30</span>
+                            </div>
+                            <div class="weight-icon-and-number">
+                                <img src="assets/images/weight.svg">
+                                <span class="number-of-weight-icon">400</span>
+                            </div>
+                        </div>
+
+                        <div class="third-row">
+                            <!--ціна -->
+                            <span class="price">189грн</span>
+                            <!--червона кнопка -->
+                            <button class="red-button">-</button>
+                            <span class="amount">1</span>
+                            <button class="green-button">+</button>
+                            <button class="cross-button">x</button>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <img src="assets/images/pizza_4_1.png" class="cut-image-of-pizza">
+                </td>
+            </tr>
+
+
+            <!-- третій рядок-->
+            <tr>
+                <td>
+                    <div class="first-column">
+                        <div class="name-of-pizza-stat">Міксовий Поло (Велика)</div>
+                        <div class="icons">
+                            <div class="crossed-circle-and-number">
+                                <img src="assets/images/size-icon.svg">
+                                <span class="number-of-size-icon">40</span>
+                            </div>
+                            <div class="weight-icon-and-number">
+                                <img src="assets/images/weight.svg">
+                                <span class="number-of-weight-icon">780</span>
+                            </div>
+                        </div>
+
+                        <div class="third-row">
+                            <!--ціна -->
+                            <span class="price">179грн</span>
+                            <!--червона кнопка -->
+                            <button class="red-button">-</button>
+                            <span class="amount">1</span>
+                            <button class="green-button">+</button>
+                            <button class="cross-button">x</button>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <img src="assets/images/pizza_1_1.png" class="cut-image-of-pizza">
+                </td>
+            </tr>
+
+
         </table>
     </div>
 
@@ -176,5 +283,11 @@
 
 <!--Own JavaScript -->
 <!--<script type="text/javascript"  src="assets/js/main.js"> </script>-->
+<script>
+     let b = document.querySelectorAll('.cross-button')[1]
+     b.addEventListener('click', function (){
+         console.log('hi')
+     })
+</script>
 </body>
 </html>
