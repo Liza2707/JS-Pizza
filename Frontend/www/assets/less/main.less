@@ -45,6 +45,12 @@
   margin-top: 10px;
 }
 
+.container-for-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .btn-primary {
   background-color: #fea300;
   border: none;
@@ -54,13 +60,54 @@
 .btn-default {
   background-color: #fea300;
   color: white;
-  margin-left: 30%;
+  margin-right: 8%;
+  border: none;
 }
 
 .price-big-size {
   padding-left: 18%;
   font-size: 25px;
   font-weight: bold;
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: -1%;
+  left: 80%;
+}
+.label-new::before {
+  content: 'Нова';
+}
+
+.label-new {
+  top: -1%;
+  left: 80%;
+  position: absolute;
+  background-color: #ed4443;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 17px;
+  display: block;
+}
+
+.label-popular::before {
+  content: 'Популярна';
+}
+
+.label-popular {
+  position: absolute;
+  top: -1%;
+  left: 65%;
+  background-color: #1ebc49;
+  padding: 6px 10px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
 }
 
 .hrn-small-size {
