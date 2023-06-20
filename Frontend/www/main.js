@@ -22,6 +22,9 @@ $(function () {
         let thumbnailDiv = document.createElement('div')
         thumbnailDiv.classList.add('thumbnail', 'pizza-card')
 
+        //додавання до піци data атрибут з id
+        thumbnailDiv.dataset.id = pizza.id
+
         if('is_new' in pizza) {
             let labelNewDiv = document.createElement('div');
             labelNewDiv.classList.add('label-new');
@@ -182,6 +185,11 @@ $(function () {
             button1.style.marginLeft = '8%'
 
             buttonsDiv.appendChild(button1);
+
+            button1.addEventListener('click', function (){
+                let idOfPizza = thumbnailDiv.dataset.id
+                addToCart(idOfPizza, 'Мала')
+            })
         }
 
 
@@ -193,6 +201,11 @@ $(function () {
             button2.textContent = 'Button 2';
 
             buttonsDiv.appendChild(button2);
+
+            button2.addEventListener('click', function (){
+                let idOfPizza = thumbnailDiv.dataset.id
+                addToCart(idOfPizza, 'Велика')
+            })
         }
 
 
@@ -228,3 +241,116 @@ $(function () {
     });
 
 });
+
+function addToCart(id, sizeOfPizza) {
+    console.log("add to basket with id: " + id)
+
+    let pizza
+    for(let i =0; i < pizza_info.length; i++){
+        if(id == pizza_info[i].id)  {
+            console.log("found")
+            pizza = pizza_info[i]
+            console.log(pizza)
+            break
+        }
+    }
+
+    // Створення елементів для нового рядка
+    let td1 = document.createElement('td')
+
+    let firstColumn = document.createElement('div')
+    firstColumn.classList.add('first-column')
+
+    let nameOfPizza = document.createElement('div')
+    nameOfPizza.classList.add('name-of-pizza-stat')
+    nameOfPizza.textContent = pizza.title + ' (' + sizeOfPizza + ')'
+    let iconsDiv = document.createElement('div')
+    iconsDiv.classList.add('icons')
+
+    let crossedCircleAndNumber = document.createElement('div')
+    crossedCircleAndNumber.classList.add('crossed-circle-and-number')
+    let imgSizeIcon = document.createElement('img')
+    imgSizeIcon.src = "assets/images/size-icon.svg"
+
+    let numberOfSizeIcon = document.createElement('span')
+    numberOfSizeIcon.classList.add('number-of-size-icon')
+    if(sizeOfPizza === 'Мала') numberOfSizeIcon.textContent = pizza.small_size.size
+    else numberOfSizeIcon.textContent = pizza.big_size.size
+    crossedCircleAndNumber.appendChild(imgSizeIcon)
+    crossedCircleAndNumber.appendChild(numberOfSizeIcon)
+
+    let weightIconAndNumber = document.createElement('div')
+    weightIconAndNumber.classList.add('weight-icon-and-number')
+    let imgWeight = document.createElement('img')
+    imgWeight.src = "assets/images/weight.svg"
+
+    let numberOfWeightIcon = document.createElement('span')
+    numberOfWeightIcon.classList.add('number-of-weight-icon')
+    if(sizeOfPizza === 'Мала')numberOfWeightIcon.textContent = pizza.small_size.weight
+    else numberOfWeightIcon.textContent = pizza.big_size.weight
+
+    weightIconAndNumber.appendChild(imgWeight)
+    weightIconAndNumber.appendChild(numberOfWeightIcon)
+
+    iconsDiv.appendChild(crossedCircleAndNumber)
+    iconsDiv.appendChild(weightIconAndNumber)
+
+    /////
+    firstColumn.appendChild(nameOfPizza)
+    firstColumn.appendChild(iconsDiv)
+
+    let thirdRow = document.createElement('div')
+    thirdRow.classList.add('third-row')
+
+    let price = document.createElement('span')
+    price.classList.add('price')
+    if(sizeOfPizza === 'Мала')price.textContent = pizza.small_size.price + 'грн'
+    else price.textContent = pizza.big_size.price +  'грн'
+    // TODO
+    // встановити відповідну ціну залежно від кількості
+
+    let redButton = document.createElement('button')
+    redButton.classList.add('red-button')
+    redButton.textContent = '-'
+
+    let amount = document.createElement('span')
+    amount.className = 'amount'
+    amount.textContent = '1'
+    // TODO
+    //  перевірити чи є вже така піца в кошику і встановити відповідну кількість
+
+    let greenButton = document.createElement('button')
+    greenButton.className = 'green-button'
+    greenButton.textContent = '+'
+
+    let crossButton = document.createElement('button')
+    crossButton.className = 'cross-button'
+    crossButton.textContent = 'x'
+
+    thirdRow.appendChild(price); thirdRow.appendChild(redButton); thirdRow.appendChild(amount)
+    thirdRow.appendChild(greenButton);
+    thirdRow.appendChild(crossButton);
+
+    firstColumn.appendChild(thirdRow)
+
+    td1.appendChild(firstColumn)
+
+
+    let td2 = document.createElement('td')
+    let imgPizza = document.createElement('img')
+    imgPizza.className = 'cut-image-of-pizza'
+    imgPizza.src = pizza.small_icon
+
+    td2.appendChild(imgPizza)
+
+    let newRow = document.createElement('tr')
+    newRow.appendChild(td1)
+    newRow.appendChild(td2)
+
+    let table = document.querySelector('.table-in-statistics')
+    table.appendChild(newRow)
+
+    let tableWrapper = document.querySelector('.table-wrapper')
+    tableWrapper.appendChild(table)
+
+}

@@ -6,6 +6,7 @@ var pizza_info = [
     {
         id:1,
         icon:'assets/images/pizza_7.jpg',
+        small_icon: 'assets/images/pizza_7_1.png',
         title: "Імпреза",
         type: 'М’ясна піца',
         content: {
@@ -32,6 +33,7 @@ var pizza_info = [
     {
         id:2,
         icon:'assets/images/pizza_2.jpg',
+        small_icon: 'assets/images/pizza_2_1.png',
         title: "BBQ",
         type: 'М’ясна піца',
         content: {
@@ -55,6 +57,7 @@ var pizza_info = [
     {
         id:3,
         icon:'assets/images/pizza_1.jpg',
+        small_icon: 'assets/images/pizza_1_1.png',
         title: "Міксовий поло",
         type: 'М’ясна піца',
         content: {
@@ -77,6 +80,7 @@ var pizza_info = [
     {
         id:4,
         icon:'assets/images/pizza_5.jpg',
+        small_icon: 'assets/images/pizza_5_1.png',
         title: "Сициліано",
         type: 'М’ясна піца',
         content: {
@@ -99,6 +103,7 @@ var pizza_info = [
     {
         id:17,
         icon:'assets/images/pizza_3.jpg',
+        small_icon: 'assets/images/pizza_3_1.png',
         title: "Маргарита",
         type: 'Вега піца',
         content: {
@@ -115,6 +120,7 @@ var pizza_info = [
     {
         id:43,
         icon:'assets/images/pizza_6.jpg',
+        small_icon: 'assets/images/pizza_6_1.png',
         title: "Мікс смаків",
         type: 'М’ясна піца',
         content: {
@@ -138,6 +144,7 @@ var pizza_info = [
     {
         id:90,
         icon:'assets/images/pizza_8.jpg',
+        small_icon: 'assets/images/pizza_8_1.png',
         title: "Дольче Маре",
         type: 'Морська піца',
         content: {
@@ -154,6 +161,7 @@ var pizza_info = [
     {
         id:6,
         icon:'assets/images/pizza_4.jpg',
+        small_icon: 'assets/images/pizza_4_1.png',
         title: "Россо Густо",
         type: 'Морська піца',
         content: {
