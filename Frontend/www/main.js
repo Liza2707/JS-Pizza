@@ -90,7 +90,6 @@ $(function () {
 
             let sizeNumber2 = document.createElement('span')
             sizeNumber2.classList.add('number-big-size-icon')
-            console.log("pizza: " + pizza.title)
             sizeNumber2.textContent = pizza.big_size.size
 
 

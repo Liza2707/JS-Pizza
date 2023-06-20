@@ -97,6 +97,22 @@
 }
 
 .label-new {
+  top: -1%;
+  left: 80%;
+  position: absolute;
+  background-color: #ed4443;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 17px;
+  display: block;
+}
+
+.label-new-additional::before {
+  content: 'Нова';
+}
+.label-new-additional {
   top: 6%;
   left: 80%;
   position: absolute;
@@ -575,10 +591,10 @@ footer {
   }
 
   .overlay {
-    width: 50%;
+    width: 60%;
   }
   #statistics-of-order {
-    left: 50%;
+    left: 60%;
   }
 
   .col-md-4 {
@@ -603,11 +619,14 @@ footer {
     left: 15%;
   }
 
-  footer { width: 50%; padding-left: 100px}
+  footer { width: 60%; padding-left: 100px}
 }
 
 @media (max-width: 845px) {
   #pizza-on-overlay {display: none}
   #button-log-in{top: 50px}
+
+ // .overlay {width: 55%}
+//  #statistics-of-order {left: 55%}
 }
 
