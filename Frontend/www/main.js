@@ -15,6 +15,21 @@ $(function () {
     //let a = 1+1
 
 
+    // встановити слухачів подій для кнопок сортування
+    let buttons = document.querySelectorAll('.option')
+    let leng = buttons.length
+    for(let i =0; i < leng; i++) {
+        buttons[i].addEventListener('click', function () {
+            let type = buttons[i].textContent
+            sort(type)
+        })
+    }
+    let mainB = document.querySelector('.choosen-option')
+    mainB.addEventListener('click', function () {
+        let type = mainB.textContent
+        sort(type)
+    })
+
     pizza_info.forEach((pizza) => {
         let colDiv = document.createElement('div')
         colDiv.classList.add('col-sm-6', 'col-md-4')
@@ -242,15 +257,26 @@ $(function () {
 
 });
 
+let arrayOfIdPizzasInCart = []
+
 function addToCart(id, sizeOfPizza) {
     console.log("add to basket with id: " + id)
 
+    // перевірка чи є вже дана піца у кошику
+    let count = arrayOfIdPizzasInCart.length
+    for(let i =0; i < count; i++) {
+        if(id == arrayOfIdPizzasInCart[i]) { // піца вже є у кошику
+            // TODO
+            return
+        }
+    }
+    arrayOfIdPizzasInCart.push(id)
+
     let pizza
-    for(let i =0; i < pizza_info.length; i++){
+    let length = pizza_info.length
+    for(let i =0; i < length; i++){
         if(id == pizza_info[i].id)  {
-            console.log("found")
             pizza = pizza_info[i]
-            console.log(pizza)
             break
         }
     }
@@ -352,5 +378,321 @@ function addToCart(id, sizeOfPizza) {
 
     let tableWrapper = document.querySelector('.table-wrapper')
     tableWrapper.appendChild(table)
+
+}
+
+function sort(typeOfPizza) {
+    console.log("type to sort: " + typeOfPizza)
+
+    let toDelete = document.querySelectorAll('.col-md-4')
+    let leng = toDelete.length
+    for(let i =0; i < leng; i++) {
+        toDelete[i].remove()
+    }
+
+    let number =0
+
+    switch (typeOfPizza){
+        case "Усі":
+            console.log("у кейсі всі")
+            pizza_info.forEach((pizza) => {
+                let id = pizza.id
+                addPizzaToPage(id)
+                number = pizza_info.length
+            })
+            break
+        case "М'ясні":
+           pizza_info.forEach((pizza) => {
+                   if('meat' in pizza.content || 'chicken' in pizza.content){
+                       let id = pizza.id
+                       console.log("є м'ясна піца")
+                       number++
+                       addPizzaToPage(id)
+               }
+        })
+            break
+        case "З ананасами":
+            pizza_info.forEach((pizza) => {
+                if('pineapple' in pizza.content){
+                    let id = pizza.id
+                    number++
+                    addPizzaToPage(id)
+                }
+            })
+            break
+        case "З грибами":
+            pizza_info.forEach((pizza) => {
+                if('mushroom' in pizza.content){
+                    let id = pizza.id
+                    number++
+                    addPizzaToPage(id)
+                }
+            })
+            break
+        case "З морепродуктами":
+            pizza_info.forEach((pizza) => {
+                if('ocean' in pizza.content){
+                    let id = pizza.id
+                    number++
+                    addPizzaToPage(id)
+                }
+            })
+            break
+        case "Вега":
+            pizza_info.forEach((pizza) => {
+                if(!('meat' in pizza.content) && !('chicken' in pizza.content) && !('ocean' in pizza.content)) {
+                    let id = pizza.id
+                    number++
+                    addPizzaToPage(id)
+                }
+            })
+            break
+    }
+
+    let chapter = document.querySelector('.current-chapter')
+    chapter.textContent = typeOfPizza
+    let numberInPage = document.querySelector('.number')
+    numberInPage.textContent = number
+
+    let pastChapter = document.querySelector('.choosen-option')
+    pastChapter.classList.remove('choosen-option')
+    pastChapter.classList.add('option')
+    for(let i =0; i < document.querySelectorAll('.option').length; i++){
+        if(document.querySelectorAll('.option')[i].textContent === typeOfPizza) {
+            let currentChapter = document.querySelectorAll('.option')[i]
+            currentChapter.classList.remove('option')
+            currentChapter.classList.add('choosen-option')
+        }
+    }
+}
+
+function addPizzaToPage(id) { // додати піцу до сторінки за її id
+
+    pizza_info.forEach((pizza) => {
+        if(pizza.id == id) {
+
+            let colDiv = document.createElement('div')
+            colDiv.classList.add('col-sm-6', 'col-md-4')
+
+            let thumbnailDiv = document.createElement('div')
+            thumbnailDiv.classList.add('thumbnail', 'pizza-card')
+
+            //додавання до піци data атрибут з id
+            thumbnailDiv.dataset.id = pizza.id
+
+            if ('is_new' in pizza) {
+                let labelNewDiv = document.createElement('div');
+                labelNewDiv.classList.add('label-new');
+                thumbnailDiv.appendChild(labelNewDiv);
+            }
+
+
+            if ('is_popular' in pizza) {
+                let labelPopularDiv = document.createElement('div')
+                labelPopularDiv.classList.add('label-popular')
+                thumbnailDiv.appendChild(labelPopularDiv);
+
+            }
+
+
+            // adding photo
+            let img = document.createElement('img')
+            img.src = pizza.icon
+
+            let captionDiv = document.createElement('div')
+            captionDiv.classList.add('caption')
+
+            // adding title of pizza
+            let titleH3 = document.createElement('h3')
+            titleH3.textContent = pizza.title
+
+            let smallP = document.createElement('p')
+            smallP.classList.add('small-p')
+            smallP.textContent = pizza.type
+
+            let descriptionP = document.createElement('p')
+            let temp = ""
+
+            for (let key in pizza.content) {
+                const values = pizza.content[key];
+                const joinedValues = values.join(', ');
+                if (temp !== "") temp = temp + ', ' + joinedValues
+                else temp = joinedValues.charAt(0).toUpperCase() + joinedValues.substring(1)
+            }
+
+            descriptionP.textContent = temp
+
+
+            let iconsDiv = document.createElement('div')
+
+            if ('small_size' in pizza) {
+
+                iconsDiv.classList.add('icons-for-small-size')
+
+
+                let sizeIcon1 = document.createElement('img')
+                sizeIcon1.src = 'assets/images/size-icon.svg'
+                sizeIcon1.classList.add('icon-size')
+
+                let sizeNumber1 = document.createElement('span')
+                sizeNumber1.classList.add('number-small-size-icon')
+                sizeNumber1.textContent = pizza.small_size.size
+
+                iconsDiv.appendChild(sizeIcon1)
+                iconsDiv.appendChild(sizeNumber1)
+            }
+
+            if ('big_size' in pizza) {
+                let sizeIcon2 = document.createElement('img')
+                sizeIcon2.src = 'assets/images/size-icon.svg'
+
+                let sizeNumber2 = document.createElement('span')
+                sizeNumber2.classList.add('number-big-size-icon')
+                sizeNumber2.textContent = pizza.big_size.size
+
+
+                iconsDiv.appendChild(sizeIcon2)
+                iconsDiv.appendChild(sizeNumber2)
+            }
+
+
+            ///
+            let weightIconsDiv = document.createElement('div')
+            weightIconsDiv.classList.add('weight-icons')
+
+            if ('small_size' in pizza) {
+                let weightIcon1 = document.createElement('img')
+                weightIcon1.src = 'assets/images/weight.svg'
+
+                weightIcon1.classList.add('icon-size')
+
+                let weightNumber1 = document.createElement('span')
+                weightNumber1.classList.add('number-small-size-icon-weight')
+                weightNumber1.textContent = pizza.small_size.weight
+
+                weightIconsDiv.appendChild(weightIcon1)
+                weightIconsDiv.appendChild(weightNumber1)
+            }
+
+
+//
+            if ('big_size' in pizza) {
+                let weightIcon2 = document.createElement('img')
+                weightIcon2.src = 'assets/images/weight.svg'
+
+                let weightNumber2 = document.createElement('span')
+                weightNumber2.classList.add('number-big-size-weight')
+                weightNumber2.textContent = pizza.big_size.weight
+
+
+                weightIconsDiv.appendChild(weightIcon2)
+                weightIconsDiv.appendChild(weightNumber2)
+            }
+
+
+            let pricesDiv = document.createElement('div')
+            pricesDiv.classList.add('prices')
+
+            if ('small_size' in pizza) {
+                let priceSmall = document.createElement('span')
+                priceSmall.classList.add('price-small-size')
+                priceSmall.textContent = pizza.small_size.price
+
+                pricesDiv.appendChild(priceSmall)
+            }
+
+            if ('big_size' in pizza) {
+                let priceBig = document.createElement('span')
+                priceBig.classList.add('price-big-size')
+                priceBig.textContent = pizza.big_size.price
+
+                pricesDiv.appendChild(priceBig)
+            }
+
+            let hrnSmall
+            if ('small_size' in pizza) {
+                hrnSmall = document.createElement('span');
+                hrnSmall.classList.add('hrn-small-size');
+                hrnSmall.textContent = 'грн.';
+            }
+
+
+// Створення блоку з класом "hrn-big-size"
+            let hrnBig
+
+            if ('big_size' in pizza) {
+                hrnBig = document.createElement('span');
+                hrnBig.classList.add('hrn-big-size');
+                hrnBig.textContent = 'грн.';
+            }
+
+
+// Створення блоку з класом "container-for-buttons"
+            let buttonsDiv = document.createElement('p');
+            buttonsDiv.classList.add('container-for-buttons');
+
+// Створення елементів кнопок
+            if ('small_size' in pizza) {
+                let button1 = document.createElement('a');
+                button1.href = '#';
+                button1.classList.add('btn', 'btn-default');
+                button1.textContent = 'Button 1';
+                button1.style.marginLeft = '8%'
+
+                buttonsDiv.appendChild(button1);
+
+                button1.addEventListener('click', function () {
+                    let idOfPizza = thumbnailDiv.dataset.id
+                    addToCart(idOfPizza, 'Мала')
+                })
+            }
+
+
+            if ('big_size' in pizza) {
+                let button2 = document.createElement('a');
+                button2.href = '#';
+                button2.classList.add('btn', 'btn-primary');
+                button2.style.marginRight = '10%'
+                button2.textContent = 'Button 2';
+
+                buttonsDiv.appendChild(button2);
+
+                button2.addEventListener('click', function () {
+                    let idOfPizza = thumbnailDiv.dataset.id
+                    addToCart(idOfPizza, 'Велика')
+                })
+            }
+
+
+// Додавання елементів до блоку "caption"
+            captionDiv.appendChild(titleH3);
+            captionDiv.appendChild(smallP);
+            captionDiv.appendChild(descriptionP);
+            captionDiv.appendChild(iconsDiv);
+            captionDiv.appendChild(weightIconsDiv);
+            captionDiv.appendChild(pricesDiv);
+            if ('small_size' in pizza) captionDiv.appendChild(hrnSmall);
+            if ('big_size' in pizza) captionDiv.appendChild(hrnBig);
+            captionDiv.appendChild(buttonsDiv);
+
+// Додавання елементів до блоку "thumbnail pizza-card"
+
+            thumbnailDiv.appendChild(img);
+            thumbnailDiv.appendChild(captionDiv);
+
+// Додавання елементів до головного елемента
+            colDiv.appendChild(thumbnailDiv);
+
+// Додавання головного елемента до DOM
+            let row = document.querySelector('.row')
+            row.appendChild(colDiv)
+
+            let container = document.querySelector('.container');
+            container.appendChild(row);
+
+            let box = document.querySelector('.box')
+            box.appendChild(container)
+        }
+    });
 
 }
