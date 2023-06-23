@@ -2,6 +2,7 @@
  * Created by chaika on 25.01.16.
  */
 let currentChapter = document.querySelector('.choosen-option').textContent
+let table = document.querySelector('.table-in-statistics')
 $(function () {
     sortByType(currentChapter)
 
@@ -25,26 +26,30 @@ $(function () {
         arrayOfIdPizzasInCart.length = 0
         let table = document.querySelector('.table-in-statistics')
       table.innerHTML = ''
+        localStorage.clear()
+        updateCountOfOrder()
+        updateSum()
     })
 
+    for(let i =0; i < localStorage.length; i++) {
+        let key = localStorage.key(i)
+        let value = localStorage.getItem(key)
+        let object = JSON.parse(value)
+        // взяти конкретні дані, які треба для додавання піц у кошик
+        let id = object.id
+        let size = object.size
+        let amount = object.amount
+        addToCart(id, size, false, amount)
+        updateSumForOnePizza(key, i)
+    }
 
+    updateCountOfOrder()
+    updateSum()
 });
 
 let arrayOfIdPizzasInCart = []
 
-function addToCart(id, sizeOfPizza) {
-    console.log("add to basket with id: " + id)
-
-    // перевірка чи є вже дана піца у кошику
-    let count = arrayOfIdPizzasInCart.length
-    for(let i =0; i < count; i++) {
-        if(id == arrayOfIdPizzasInCart[i]) { // піца вже є у кошику
-            // TODO
-            return
-        }
-    }
-    arrayOfIdPizzasInCart.push(id)
-
+function addToCart(id, sizeOfPizza,isNew, amountArg) {
     let pizza
     let length = pizza_info.length
     for(let i =0; i < length; i++){
@@ -53,6 +58,8 @@ function addToCart(id, sizeOfPizza) {
             break
         }
     }
+
+    arrayOfIdPizzasInCart.push(id)
 
     // Створення елементів для нового рядка
     let td1 = document.createElement('td')
@@ -113,20 +120,30 @@ function addToCart(id, sizeOfPizza) {
     redButton.textContent = '-'
     redButton.addEventListener('click', function () {
         let field = redButton.nextSibling.textContent
+        let nameToChange = nameOfPizza.textContent
         if(parseInt(field) == 1) {
             let idToDelete = newRow.dataset.id
             let index = arrayOfIdPizzasInCart.indexOf(idToDelete)
             arrayOfIdPizzasInCart.splice(index, 1)
             newRow.remove()
+            localStorage.removeItem(nameToChange)
         }
-        else redButton.nextSibling.textContent = parseInt(field) -  1
+        else {
+            redButton.nextSibling.textContent = parseInt(field) -  1
+            updateLocalStorageMinusOneItem(nameToChange)
+            let indexOfRow = Array.from(table.children).indexOf(newRow)
+            updateSumForOnePizza(nameToChange, indexOfRow)
+        }
+        updateCountOfOrder()
+        updateSum()
+
+
     })
 
     let amount = document.createElement('span')
     amount.className = 'amount'
-    amount.textContent = '1'
-    // TODO
-    //  перевірити чи є вже така піца в кошику і встановити відповідну кількість
+    if(amountArg !== 0) amount.textContent = amountArg
+    else amount.textContent = '1'
 
     let greenButton = document.createElement('button')
     greenButton.className = 'green-button'
@@ -134,6 +151,13 @@ function addToCart(id, sizeOfPizza) {
     greenButton.addEventListener('click', function () {
         let field = greenButton.previousSibling.textContent
         greenButton.previousSibling.textContent = parseInt(field) + 1
+        let name = nameOfPizza.textContent
+
+
+        updateLocalStorageAddingOneItem(name)
+        updateSum()
+        let indexOfRow = Array.from(table.children).indexOf(newRow)
+        updateSumForOnePizza(name, indexOfRow)
     })
 
     let crossButton = document.createElement('button')
@@ -144,6 +168,11 @@ function addToCart(id, sizeOfPizza) {
         let index = arrayOfIdPizzasInCart.indexOf(idToDelete)
         arrayOfIdPizzasInCart.splice(index, 1)
         newRow.remove()
+
+        let nameToDelete = nameOfPizza.textContent
+        localStorage.removeItem(nameToDelete)
+        updateCountOfOrder()
+        updateSum()
     })
 
     thirdRow.appendChild(price); thirdRow.appendChild(redButton); thirdRow.appendChild(amount)
@@ -175,6 +204,23 @@ function addToCart(id, sizeOfPizza) {
 
     let tableWrapper = document.querySelector('.table-wrapper')
     tableWrapper.appendChild(table)
+
+    let test = parseInt(price.textContent.slice(0, -3))
+    test++
+    // додати або оновити кількість об'єкту в до localstorage
+    if(amountArg === 0){
+        let obj = {
+            id: pizza.id,
+            size: sizeOfPizza,
+            price: price.textContent,
+            amount: 1
+        }
+
+        let objString = JSON.stringify(obj)
+        let key = nameOfPizza.textContent
+        // ключ у вигляді Маргарита (Мала)
+        localStorage.setItem(key, objString)
+    }
 
 }
 
@@ -438,7 +484,20 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
 
                 button1.addEventListener('click', function () {
                     let idOfPizza = thumbnailDiv.dataset.id
-                    addToCart(idOfPizza, 'Мала')
+                    let nameOfPizza = pizza.title + ' (Мала)'
+                    if(localStorage.getItem(nameOfPizza) === null) addToCart(idOfPizza, 'Мала', true, 0)
+                    else {
+                        for(let i =0; i < document.querySelectorAll('.name-of-pizza-stat').length; i++) {
+                            if(document.querySelectorAll('.name-of-pizza-stat')[i].textContent === nameOfPizza){
+                                let field = document.querySelectorAll('.amount')[i].textContent
+                                document.querySelectorAll('.amount')[i].textContent = parseInt(field) + 1
+                                break
+                            }
+                        }
+                        updateLocalStorageAddingOneItem(nameOfPizza)
+                    }
+                    updateCountOfOrder()
+                    updateSum()
                 })
             }
 
@@ -454,7 +513,20 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
 
                 button2.addEventListener('click', function () {
                     let idOfPizza = thumbnailDiv.dataset.id
-                    addToCart(idOfPizza, 'Велика')
+                    let nameOfPizza = pizza.title + ' (Велика)'
+                    if(localStorage.getItem(nameOfPizza) === null) addToCart(idOfPizza, 'Велика', true, 0)
+                    else {
+                        for(let i =0; i < document.querySelectorAll('.name-of-pizza-stat').length; i++) {
+                            if(document.querySelectorAll('.name-of-pizza-stat')[i].textContent === nameOfPizza){
+                                let field = document.querySelectorAll('.amount')[i].textContent
+                                document.querySelectorAll('.amount')[i].textContent = parseInt(field) + 1
+                                break
+                            }
+                        }
+                        updateLocalStorageAddingOneItem(nameOfPizza)
+                    }
+                    updateCountOfOrder()
+                    updateSum()
                 })
             }
 
@@ -490,4 +562,50 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
         }
     });
 
+}
+
+function updateLocalStorageAddingOneItem(nameOfPizza) {
+    let storedObjString = localStorage.getItem(nameOfPizza)
+    let storedObj = JSON.parse(storedObjString)
+
+    storedObj.amount = storedObj.amount + 1
+    let updatedObjString = JSON.stringify(storedObj)
+
+    localStorage.setItem(nameOfPizza, updatedObjString)
+}
+
+function updateLocalStorageMinusOneItem(nameOfPizza) {
+    let storedObjString = localStorage.getItem(nameOfPizza)
+    let storedObj = JSON.parse(storedObjString)
+
+    storedObj.amount = storedObj.amount - 1
+    let updatedObjString = JSON.stringify(storedObj)
+
+    localStorage.setItem(nameOfPizza, updatedObjString)
+}
+
+function updateCountOfOrder() {
+        document.querySelectorAll('.number')[1].textContent = localStorage.length.toString()
+}
+
+function updateSum(){
+    let count =0
+   for(let i =0; i < localStorage.length; i++) {
+       let key = localStorage.key(i)
+       let value = localStorage.getItem(key)
+       let object = JSON.parse(value)
+       let amount = object.amount
+       let price = object.price.slice(0, -3)
+       count += amount * price
+   }
+   document.querySelector('.sum-of-order').textContent = count.toString()
+}
+
+function updateSumForOnePizza(nameOfPizza, indexOfRow) {
+    let value = localStorage.getItem(nameOfPizza)
+    let object = JSON.parse(value)
+    let amount = object.amount
+    let price = object.price.slice(0, -3)
+    let sum = price * amount
+    document.querySelectorAll('.price')[indexOfRow].textContent = sum + 'грн'
 }
