@@ -2,7 +2,8 @@
  * Created by chaika on 25.01.16.
  */
 let currentChapter = document.querySelector('.choosen-option').textContent
-let table = document.querySelector('.table-in-statistics')
+    //let table = document.querySelector('.table-in-statistics')
+let sum
 $(function () {
     sortByType(currentChapter)
 
@@ -48,7 +49,7 @@ $(function () {
     let buttonOrder = document.querySelector('.button-in-stat-to-order')
     buttonOrder.addEventListener('click', function () {
        if(localStorage.length !== 0) {
-           window.alert('Дякуємо! Ваше замовлення прийнято в обробку.')
+           window.alert('Дякуємо! Ваше замовлення прийнято в обробку. До сплати ' + sum + 'грн')
            localStorage.clear()
            location.reload()
        }
@@ -615,6 +616,7 @@ function updateSum(){
        count += amount * price
    }
    document.querySelector('.sum-of-order').textContent = count.toString()
+    sum = count
 }
 
 function updateSumForOnePizza(nameOfPizza, indexOfRow) {
