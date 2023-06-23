@@ -23,7 +23,6 @@ $(function () {
 
     let buttonClearOrder = document.getElementById('button-clear-order')
     buttonClearOrder.addEventListener('click', function () {
-        arrayOfIdPizzasInCart.length = 0
         let table = document.querySelector('.table-in-statistics')
       table.innerHTML = ''
         localStorage.clear()
@@ -45,9 +44,18 @@ $(function () {
 
     updateCountOfOrder()
     updateSum()
+
+    let buttonOrder = document.querySelector('.button-in-stat-to-order')
+    buttonOrder.addEventListener('click', function () {
+       if(localStorage.length !== 0) {
+           window.alert('Дякуємо! Ваше замовлення прийнято в обробку.')
+           localStorage.clear()
+           location.reload()
+       }
+        else window.alert('У Вас немає жодної позиції в кошику. Аби замовити, додайте, будь ласка, товар.')
+    })
 });
 
-let arrayOfIdPizzasInCart = []
 
 function addToCart(id, sizeOfPizza,isNew, amountArg) {
     let pizza
@@ -59,7 +67,6 @@ function addToCart(id, sizeOfPizza,isNew, amountArg) {
         }
     }
 
-    arrayOfIdPizzasInCart.push(id)
 
     // Створення елементів для нового рядка
     let td1 = document.createElement('td')
@@ -122,9 +129,6 @@ function addToCart(id, sizeOfPizza,isNew, amountArg) {
         let field = redButton.nextSibling.textContent
         let nameToChange = nameOfPizza.textContent
         if(parseInt(field) == 1) {
-            let idToDelete = newRow.dataset.id
-            let index = arrayOfIdPizzasInCart.indexOf(idToDelete)
-            arrayOfIdPizzasInCart.splice(index, 1)
             newRow.remove()
             localStorage.removeItem(nameToChange)
         }
@@ -165,8 +169,6 @@ function addToCart(id, sizeOfPizza,isNew, amountArg) {
     crossButton.textContent = 'x'
     crossButton.addEventListener('click', function () {
         let idToDelete = newRow.dataset.id
-        let index = arrayOfIdPizzasInCart.indexOf(idToDelete)
-        arrayOfIdPizzasInCart.splice(index, 1)
         newRow.remove()
 
         let nameToDelete = nameOfPizza.textContent
@@ -498,6 +500,13 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                     }
                     updateCountOfOrder()
                     updateSum()
+                    let c = document.querySelectorAll('.name-of-pizza-stat').length
+                    for(let i =0; i < c; i++) {
+                        if(document.querySelectorAll('.name-of-pizza-stat')[i].textContent === nameOfPizza) {
+                            updateSumForOnePizza(nameOfPizza, i)
+                            break
+                        }
+                    }
                 })
             }
 
@@ -527,6 +536,13 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                     }
                     updateCountOfOrder()
                     updateSum()
+                    let c = document.querySelectorAll('.name-of-pizza-stat').length
+                    for(let i =0; i < c; i++) {
+                        if(document.querySelectorAll('.name-of-pizza-stat')[i].textContent === nameOfPizza) {
+                            updateSumForOnePizza(nameOfPizza, i)
+                            break
+                        }
+                    }
                 })
             }
 
