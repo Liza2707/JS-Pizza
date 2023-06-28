@@ -323,19 +323,26 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
             //додавання до піци data атрибут з id
             thumbnailDiv.dataset.id = pizza.id
 
-            if ('is_new' in pizza) {
-                let labelNewDiv = document.createElement('div');
-                labelNewDiv.classList.add('label-new');
-                thumbnailDiv.appendChild(labelNewDiv);
-            }
-
-
             if ('is_popular' in pizza) {
                 let labelPopularDiv = document.createElement('div')
                 labelPopularDiv.classList.add('label-popular')
                 thumbnailDiv.appendChild(labelPopularDiv);
 
             }
+
+            if ('is_new' in pizza) {
+                if('is_popular' in pizza) {
+                    let labelNewDiv = document.createElement('div');
+                    labelNewDiv.classList.add('label-new-additional');
+                    thumbnailDiv.appendChild(labelNewDiv);
+                } else {
+                    let labelNewDiv = document.createElement('div');
+                    labelNewDiv.classList.add('label-new');
+                    thumbnailDiv.appendChild(labelNewDiv);
+                }
+
+            }
+
 
 
             // adding photo
