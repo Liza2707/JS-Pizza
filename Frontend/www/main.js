@@ -486,7 +486,7 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                 let button1 = document.createElement('button');
                 button1.href = '#';
                 button1.classList.add('btn', 'btn-default');
-                button1.textContent = 'Button 1';
+                button1.textContent = 'Купити';
                 button1.style.marginLeft = '8%'
 
                 buttonsDiv.appendChild(button1);
@@ -523,7 +523,7 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                 button2.href = '#';
                 button2.classList.add('btn', 'btn-primary');
                 button2.style.marginRight = '10%'
-                button2.textContent = 'Button 2';
+                button2.textContent = 'Купити';
 
                 buttonsDiv.appendChild(button2);
 
