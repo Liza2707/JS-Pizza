@@ -1,6 +1,4 @@
-/**
- * Created by chaika on 25.01.16.
- */
+
 let currentChapter = document.querySelector('.choosen-option').textContent
 let sum
 $(function () {
