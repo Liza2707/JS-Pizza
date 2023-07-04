@@ -323,19 +323,26 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
             //додавання до піци data атрибут з id
             thumbnailDiv.dataset.id = pizza.id
 
-            if ('is_new' in pizza) {
-                let labelNewDiv = document.createElement('div');
-                labelNewDiv.classList.add('label-new');
-                thumbnailDiv.appendChild(labelNewDiv);
-            }
-
-
             if ('is_popular' in pizza) {
                 let labelPopularDiv = document.createElement('div')
                 labelPopularDiv.classList.add('label-popular')
                 thumbnailDiv.appendChild(labelPopularDiv);
 
             }
+
+            if ('is_new' in pizza) {
+                if('is_popular' in pizza) {
+                    let labelNewDiv = document.createElement('div');
+                    labelNewDiv.classList.add('label-new-additional');
+                    thumbnailDiv.appendChild(labelNewDiv);
+                } else {
+                    let labelNewDiv = document.createElement('div');
+                    labelNewDiv.classList.add('label-new');
+                    thumbnailDiv.appendChild(labelNewDiv);
+                }
+
+            }
+
 
 
             // adding photo
@@ -479,7 +486,7 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                 let button1 = document.createElement('button');
                 button1.href = '#';
                 button1.classList.add('btn', 'btn-default');
-                button1.textContent = 'Button 1';
+                button1.textContent = 'Купити';
                 button1.style.marginLeft = '8%'
 
                 buttonsDiv.appendChild(button1);
@@ -516,7 +523,7 @@ function addPizzaToPage(id) { // додати піцу до сторінки з�
                 button2.href = '#';
                 button2.classList.add('btn', 'btn-primary');
                 button2.style.marginRight = '10%'
-                button2.textContent = 'Button 2';
+                button2.textContent = 'Купити';
 
                 buttonsDiv.appendChild(button2);
 
